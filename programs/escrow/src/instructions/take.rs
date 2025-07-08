@@ -45,7 +45,7 @@ pub struct Take<'info> {
         associated_token::token_program = token_program,
     )]
     pub taker_ata_a: InterfaceAccount<'info, TokenAccount>,
-         #[account(
+    #[account(
         mut,
         associated_token::mint = mint_b,
         associated_token::authority = maker,
@@ -54,6 +54,9 @@ pub struct Take<'info> {
     pub taker_ata_b: InterfaceAccount<'info, TokenAccount>,
      #[account(
         mut,
+        has_one = mint_a,
+        has_one = mint_b,
+        has_one = maker,
         seeds = [b"escrow", escrow.maker.key().as_ref(),escrow.seed.to_le_bytes().as_ref()],
         bump = escrow.bump,
         close = maker
